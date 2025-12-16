@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const UserSchema= mongoose.Schema({
+const AdminSchema= mongoose.Schema({
     fullname:{
         type:String,
         minLength:3,
@@ -12,20 +12,12 @@ const UserSchema= mongoose.Schema({
         required:true,
     },
     password:String,
-    cart:{
+    products:{
         type:Array,
         default:[]
     },
-    isadmin:{
-        type:Boolean,
-        default:false,
-    },
-    orders:{
-        type:Array,
-        default:[]
-    },
-    contact:Number,
-    picture: String
+    picture: String,
+    gstin:String, 
 });
 
-module.exports=mongoose.model('User',UserSchema);
+module.exports=mongoose.model('Admin',AdminSchema);
