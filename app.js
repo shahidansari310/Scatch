@@ -8,6 +8,9 @@ const connectDb = require('./config/db');
 const adminRoute=require('./routes/adminRoute')
 const usersRoute=require('./routes/usersRoute')
 const productsRoute=require('./routes/productsRoute')
+const indexRouter=require('./routes/index')
+const session = require("express-session");
+const flash = require("connect-flash");
 
 connectDb();
 
@@ -16,10 +19,16 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'public')));
+app.use(session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true
+}));
+app.use(flash());
 
  
+app.use('/',indexRouter);
 app.use('/admin',adminRoute);
 app.use('/users',usersRoute);
 app.use('/products',productsRoute);
-
 app.listen(PORT);
