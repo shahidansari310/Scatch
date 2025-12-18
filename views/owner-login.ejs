@@ -9,6 +9,12 @@
             <p class="text-zinc-500 mt-1">Please verify your owner credentials</p>
         </div>
 
+        <% if(error && error.length > 0){ %>
+            <div class="mb-6 bg-red-50 text-red-600 px-4 py-3 rounded-xl text-sm text-center font-medium border border-red-100">
+                <%= error %>
+            </div>
+        <% } %>
+
         <form action="/admin/login" method="post" class="space-y-5">
             <div>
                 <label class="block text-xs font-bold uppercase text-zinc-400 mb-2 ml-1">Email Address</label>
@@ -23,6 +29,10 @@
                 Enter Dashboard
             </button>
         </form>
+
+        <div class="mt-8 pt-8 border-t border-zinc-100 text-center">
+            <p class="text-zinc-500 text-sm">Regular user? <a href="/" class="text-blue-600 font-bold hover:underline">Login here</a></p>
+        </div>
     </div>
 </div>
 <%- include('./partials/footer') %>

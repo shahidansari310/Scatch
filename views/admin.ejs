@@ -6,7 +6,7 @@
             <div>
                 <h4 class="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-4">Management</h4>
                 <nav class="flex flex-col gap-3 font-medium text-zinc-600">
-                     <a href="/admin/admin" class="flex items-center gap-2 text-blue-600 bg-blue-50 px-4 py-2 rounded-xl">
+                     <a href="/admin/dashboard" class="flex items-center gap-2 text-blue-600 bg-blue-50 px-4 py-2 rounded-xl">
                         <i class="ri-layout-grid-line"></i> All Products
                     </a>
                     <a href="/admin/create-product" class="flex items-center gap-2 hover:text-blue-600 hover:bg-zinc-50 px-4 py-2 rounded-xl transition">
@@ -17,7 +17,7 @@
             
             <div class="pt-6 border-t border-zinc-100">
                 <h4 class="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-4">System</h4>
-                <a href="/users/logout" class="flex items-center gap-2 text-red-500 hover:bg-red-50 px-4 py-2 rounded-xl transition">
+                <a href="/admin/logout" class="flex items-center gap-2 text-red-500 hover:bg-red-50 px-4 py-2 rounded-xl transition">
                     <i class="ri-logout-box-r-line"></i> Logout
                 </a>
             </div>
@@ -65,6 +65,12 @@
                         </div>
                     </div>
                 <% }) %>
+            <% } else { %>
+                <div class="col-span-2 text-center py-20">
+                    <i class="ri-inbox-line text-6xl text-zinc-300"></i>
+                    <h3 class="text-xl font-bold text-zinc-600 mt-4">No products yet</h3>
+                    <p class="text-zinc-500 mt-2">Create your first product to get started</p>
+                </div>
             <% } %>
         </div>
     </main>

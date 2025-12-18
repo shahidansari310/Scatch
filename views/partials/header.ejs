@@ -41,7 +41,7 @@
                     <a href="/shop" class="hover:text-blue-600 transition-colors">Shop</a>
                     <a href="/cart" class="relative group p-2">
                         <i class="ri-shopping-bag-3-line text-2xl"></i>
-                        <% if(user && user.cart.length> 0) { %>
+                        <% if(typeof user !=='undefined' && user && user.cart && user.cart.length> 0) { %>
                             <span
                                 class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white group-hover:scale-110 transition">
                                 <%= user.cart.length %>
