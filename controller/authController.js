@@ -7,7 +7,10 @@ module.exports.registerUser=async (req,res)=>{
         let {email,password,fullname}=req.body;
 
         let user=await userModel.findOne({email:email});
-        if(user) return res.status(401).send("User with this email already exists!");
+        if (user) {
+            req.flash("error", "You already have an account, please login.");
+            return res.redirect("/signup");     
+            }
 
         bcrypt.genSalt(10,(err,salt)=>{
             bcrypt.hash(password,salt,async (err,hash)=>{
@@ -21,7 +24,6 @@ module.exports.registerUser=async (req,res)=>{
                 let token=generateToken(user);
                 res.cookie("token",token);
 
-                // res.status(200).send("User Created successfully");
                 res.flash("success","User created successfully");
                 res.redirect("/");
 

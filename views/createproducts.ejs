@@ -1,55 +1,58 @@
 <%- include('./partials/header') %>
-
-    <% if(success.length>0){ %>
-        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
-            <span class="inline-block mt-1 mb-1 text-white">
-                <%= success %>
-            </span>
+<div class="max-w-7xl mx-auto px-10 py-12 flex gap-10">
+    <aside class="w-1/4 sticky top-24 h-fit space-y-8">
+        <div class="space-y-3 font-medium text-zinc-600">
+            <h4 class="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-4">Navigation</h4>
+            <a href="/admin/admin" class="block hover:text-blue-600 transition">All Products</a>
+            <a href="" class="block text-blue-600 font-bold underline underline-offset-4">Create New Product</a>
         </div>
+    </aside>
+
+    <main class="w-3/4">
+        <% if(success.length > 0){ %>
+            <div class="mb-8 bg-blue-50 text-blue-600 p-4 rounded-xl border border-blue-100 font-medium animate-pulse">
+                <%= success %>
+            </div>
         <% } %>
 
-            <div class="min-h-screen flex flex-col">
-                <div class="container px-10 py-20 flex flex-grow">
-                    <div class="w-[25%] flex h-screen flex-col items-start">
-                        <div class="flex flex-col">
-                            <a class="block w-fit mb-2" href="">All Products</a>
-                            <a class="block w-fit mb-2" href="">Create new product</a>
-                        </div>
+        <div class="bg-white rounded-3xl p-10 shadow-sm border border-zinc-100">
+            <h2 class="text-2xl font-bold mb-8">Add New Product to Shop</h2>
+            
+            <form action="/products/create" method="post" enctype="multipart/form-data" class="space-y-10">
+                <div class="space-y-4">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-400">Media Assets</h3>
+                    <div class="border-2 border-dashed border-zinc-200 rounded-2xl p-10 text-center hover:border-blue-400 transition group">
+                        <label class="cursor-pointer">
+                            <i class="ri-image-add-line text-4xl text-zinc-300 group-hover:text-blue-500 transition"></i>
+                            <p class="mt-2 text-zinc-500 font-medium">Select product image file</p>
+                            <input name="image" type="file" class="hidden" required>
+                        </label>
                     </div>
-                    <main class="w-3/4 bg-white p-8 shadow ml-4">
-                        <h2 class="text-xl font-bold mb-4">Create New Product</h2>
-                        <form autocomplete="off" action="/products/create" method="post" enctype="multipart/form-data">
-                            <div class="mb-6">
-                                <h3 class="text-lg font-semibold mb-2">Product Details</h3>
-                                <div class="mb-4">
-                                    <label class="block mb-2 font-medium">Product Image</label>
-                                    <input name="image" type="file" class="py-2 px-4 rounded" value="Select File">
-                                </div>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <input name="name" type="text" placeholder="Product Name"
-                                        class="border p-2 rounded w-full">
-                                    <input name="price" type="text" placeholder="Product Price"
-                                        class="border p-2 rounded w-full">
-                                    <input name="discount" type="text" placeholder="Discount Price"
-                                        class="border p-2 rounded w-full">
-                                </div>
-                            </div>
-
-                            <div>
-                                <h3 class="text-lg font-semibold mb-2">Panel Details</h3>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <input name="bgcolor" type="text" placeholder="Background Color"
-                                        class="border p-2 rounded w-full">
-                                    <input name="panelcolor" type="text" placeholder="Panel Color"
-                                        class="border p-2 rounded w-full">
-                                    <input name="textcolor" type="text" placeholder="Text Color"
-                                        class="border p-2 rounded w-full">
-                                </div>
-                            </div>
-                            <input class="px-5 py-2 rounded mt-3 bg-blue-500 text-white" type="submit"
-                                value="Create New Product">
-                        </form>
-                    </main>
                 </div>
-            </div>
-            <%- include('./partials/footer') %>
+
+                <div class="space-y-6">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-400">Product Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <input name="name" type="text" placeholder="Product Name" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        <input name="price" type="text" placeholder="MRP Price" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        <input name="discount" type="text" placeholder="Discount Price" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-400">Panel & UI Customization</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <input name="bgcolor" type="text" placeholder="Background Hex (e.g. #F3F4F6)" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        <input name="panelcolor" type="text" placeholder="Panel Hex Color" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        <input name="textcolor" type="text" placeholder="Text Hex Color" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
+                    </div>
+                </div>
+
+                <button type="submit" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition">
+                    Publish Product to Shop
+                </button>
+            </form>
+        </div>
+    </main>
+</div>
+<%- include('./partials/footer') %>

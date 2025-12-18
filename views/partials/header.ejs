@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Scatch | Premium Bags</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
 </head>
+<body class="bg-[#F8F9FA]">
+    <nav class="w-full fixed top-0 z-[100] glass-nav px-10 py-5 flex justify-between items-center transition-all duration-300">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <i class="ri-handbag-fill text-white text-lg"></i>
+            </div>
+            <h3 class="text-2xl font-black tracking-tighter text-zinc-900">SCATCH<span class="text-blue-600">.</span></h3>
+        </div>
 
-<body class="font-['helvetica_now_display']">
-    <nav class="w-full flex fixed justify-between top-0 left-0 px-5 py-3">
-        <h3 class="text-xl">Scatch</h3>
-        <% var loggedin=typeof loggedin !=='undefined' ? loggedin :true %>
-        <% if(loggedin) {%>
-        <div class="flex gap-5">
-            <a href="/shop">Shop</a>
-            <a href="/cart">Cart</a>
-            <a href="/account">My Account</a>
-            <a href="/users/logout" class="text-red-600">Logout</a>
+        <% var loggedin = typeof loggedin !== 'undefined' ? loggedin : true %>
+        <% if(loggedin) { %>
+        <div class="flex gap-10 items-center font-semibold text-zinc-500 uppercase text-xs tracking-widest">
+            <a href="/shop" class="hover:text-blue-600 transition-colors">Shop</a>
+            <a href="/cart" class="hover:text-blue-600 transition-colors flex items-center gap-2">
+                Cart <span class="bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full">0</span>
+            </a>
+            <a href="/account" class="hover:text-blue-600 transition-colors">My Account</a>
+            <a href="/users/logout" class="text-red-500 hover:text-red-700 transition-colors">Logout</a>
         </div>
         <% } %>
     </nav>
+    <div class="pt-24"></div>
