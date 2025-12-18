@@ -4,52 +4,42 @@
         <div class="space-y-3 font-medium text-zinc-600">
             <h4 class="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-4">Navigation</h4>
             <a href="/admin/admin" class="block hover:text-blue-600 transition">All Products</a>
-            <a href="" class="block text-blue-600 font-bold underline underline-offset-4">Create New Product</a>
+            <a href="/admin/create-product" class="block text-blue-600 font-bold underline underline-offset-4">Create New Product</a>
         </div>
     </aside>
 
     <main class="w-3/4">
-        <% if(success.length > 0){ %>
-            <div class="mb-8 bg-blue-50 text-blue-600 p-4 rounded-xl border border-blue-100 font-medium animate-pulse">
+        <% if(success && success.length > 0){ %>
+            <div class="mb-8 bg-blue-50 text-blue-600 p-4 rounded-xl border border-blue-100 font-medium">
                 <%= success %>
             </div>
         <% } %>
 
         <div class="bg-white rounded-3xl p-10 shadow-sm border border-zinc-100">
-            <h2 class="text-2xl font-bold mb-8">Add New Product to Shop</h2>
-            
+            <h2 class="text-2xl font-bold mb-8">Add New Product</h2>
             <form action="/products/create" method="post" enctype="multipart/form-data" class="space-y-10">
                 <div class="space-y-4">
-                    <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-400">Media Assets</h3>
-                    <div class="border-2 border-dashed border-zinc-200 rounded-2xl p-10 text-center hover:border-blue-400 transition group">
-                        <label class="cursor-pointer">
-                            <i class="ri-image-add-line text-4xl text-zinc-300 group-hover:text-blue-500 transition"></i>
-                            <p class="mt-2 text-zinc-500 font-medium">Select product image file</p>
-                            <input name="image" type="file" class="hidden" required>
-                        </label>
-                    </div>
+                    <label class="cursor-pointer border-2 border-dashed border-zinc-200 rounded-2xl p-10 block text-center">
+                        <input name="image" type="file" class="hidden" required>
+                        <i class="ri-image-add-line text-4xl text-zinc-300"></i>
+                        <p class="mt-2 text-zinc-500">Select product image</p>
+                    </label>
                 </div>
 
-                <div class="space-y-6">
-                    <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-400">Product Details</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <input name="name" type="text" placeholder="Product Name" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
-                        <input name="price" type="text" placeholder="MRP Price" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
-                        <input name="discount" type="text" placeholder="Discount Price" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
-                    </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input name="name" type="text" placeholder="Product Name" class="px-4 py-3 bg-zinc-50 border rounded-xl" required>
+                    <input name="price" type="number" placeholder="MRP Price" class="px-4 py-3 bg-zinc-50 border rounded-xl" required>
+                    <input name="discount" type="number" placeholder="Discount" class="px-4 py-3 bg-zinc-50 border rounded-xl">
                 </div>
 
-                <div class="space-y-6">
-                    <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-400">Panel & UI Customization</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <input name="bgcolor" type="text" placeholder="Background Hex (e.g. #F3F4F6)" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
-                        <input name="panelcolor" type="text" placeholder="Panel Hex Color" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
-                        <input name="textcolor" type="text" placeholder="Text Hex Color" class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition">
-                    </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input name="bgcolor" type="text" placeholder="Background Hex" class="px-4 py-3 bg-zinc-50 border rounded-xl">
+                    <input name="panelcolor" type="text" placeholder="Panel Hex" class="px-4 py-3 bg-zinc-50 border rounded-xl">
+                    <input name="textcolor" type="text" placeholder="Text Hex" class="px-4 py-3 bg-zinc-50 border rounded-xl">
                 </div>
 
-                <button type="submit" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition">
-                    Publish Product to Shop
+                <button type="submit" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg">
+                    Publish Product
                 </button>
             </form>
         </div>

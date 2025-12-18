@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,11 @@
     <link rel="shortcut icon" href="\images\image.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
         .glass-nav {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
@@ -18,25 +23,34 @@
         }
     </style>
 </head>
+
 <body class="bg-[#F8F9FA]">
-    <nav class="w-full fixed top-0 z-[100] glass-nav px-10 py-5 flex justify-between items-center transition-all duration-300">
+    <nav
+        class="w-full fixed top-0 z-[100] glass-nav px-10 py-5 flex justify-between items-center transition-all duration-300">
         <div class="flex items-center gap-2">
             <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <i class="ri-handbag-fill text-white text-lg"></i>
             </div>
-            <h3 class="text-2xl font-black tracking-tighter text-zinc-900">SCATCH<span class="text-blue-600">.</span></h3>
+            <h3 class="text-2xl font-black tracking-tighter text-zinc-900">SCATCH<span class="text-blue-600">.</span>
+            </h3>
         </div>
 
-        <% var loggedin = typeof loggedin !== 'undefined' ? loggedin : true %>
-        <% if(loggedin) { %>
-        <div class="flex gap-10 items-center font-semibold text-zinc-500 uppercase text-xs tracking-widest">
-            <a href="/shop" class="hover:text-blue-600 transition-colors">Shop</a>
-            <a href="/cart" class="hover:text-blue-600 transition-colors flex items-center gap-2">
-                Cart <span class="bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full">0</span>
-            </a>
-            <a href="/account" class="hover:text-blue-600 transition-colors">My Account</a>
-            <a href="/users/logout" class="text-red-500 hover:text-red-700 transition-colors">Logout</a>
-        </div>
-        <% } %>
+        <% var loggedin=typeof loggedin !=='undefined' ? loggedin : true %>
+            <% if(loggedin) { %>
+                <div class="flex gap-10 items-center font-semibold text-zinc-500 uppercase text-xs tracking-widest">
+                    <a href="/shop" class="hover:text-blue-600 transition-colors">Shop</a>
+                    <a href="/cart" class="relative group p-2">
+                        <i class="ri-shopping-bag-3-line text-2xl"></i>
+                        <% if(user && user.cart.length> 0) { %>
+                            <span
+                                class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white group-hover:scale-110 transition">
+                                <%= user.cart.length %>
+                            </span>
+                            <% } %>
+                    </a>
+                    <a href="/account" class="hover:text-blue-600 transition-colors">My Account</a>
+                    <a href="/users/logout" class="text-red-500 hover:text-red-700 transition-colors">Logout</a>
+                </div>
+                <% } %>
     </nav>
     <div class="pt-24"></div>
