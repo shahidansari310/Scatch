@@ -5,9 +5,8 @@ const userModel = require("../models/user-model");
 const router = express.Router();
 
 router.get("/", function (req, res) {
-    // let error = req.flash("error");
-    // res.render("index", { error, loggedin: false }); 
-    res.send("HOME ROUTE WORKING");
+    let error = req.flash("error");
+    res.render("index", { error, loggedin: false }); 
 });
 
 router.get("/signup", function (req, res) {
