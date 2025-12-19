@@ -5,8 +5,9 @@ const userModel = require("../models/user-model");
 const router = express.Router();
 
 router.get("/", function (req, res) {
-    let error = req.flash("error");
-    res.render("index", { error, loggedin: false }); 
+    // let error = req.flash("error");
+    // res.render("index", { error, loggedin: false }); 
+    res.send("HOME ROUTE WORKING");
 });
 
 router.get("/signup", function (req, res) {
@@ -45,10 +46,6 @@ router.get("/cart", isLoggedin, async (req, res) => {
         final,
         loggedin: true 
     });
-});
-
-router.get("/account", isLoggedin, async (req, res) => {
-    res.render("account", { user: req.user });
 });
 
 router.get("/account", isLoggedin, async (req, res) => {
