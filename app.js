@@ -20,9 +20,10 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'public')));
 app.use(session({
-    secret: "keyboard cat",
+    secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie: { secure: false } 
 }));
 app.use(flash());
 
