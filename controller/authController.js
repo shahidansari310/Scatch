@@ -8,8 +8,9 @@ module.exports.registerUser=async (req,res)=>{
 
         let user=await userModel.findOne({email:email});
         if (user) {
-            req.flash("error", "You already have an account, please login.");
-            return res.redirect("/signup");     
+            // req.flash("error", "You already have an account, please login.");
+            // return res.redirect("/signup");    
+            return res.redirect("/signup?error=You already have an account, please login."); 
             }
 
         bcrypt.genSalt(10,(err,salt)=>{
@@ -24,9 +25,9 @@ module.exports.registerUser=async (req,res)=>{
                 let token=generateToken(user);
                 res.cookie("token",token);
 
-                // Fixed: Changed res.flash to req.flash
-                req.flash("success","User created successfully");
-                res.redirect("/shop");
+                // req.flash("success","User created successfully");
+                // res.redirect("/shop");
+                return res.redirect("/shop?success=User created successfully");
 
                 })
             })
@@ -41,8 +42,9 @@ module.exports.loginUser=async (req,res)=>{
         let user=await userModel.findOne({email:email});
 
         if(!user) {
-            req.flash("error", "Invalid email or password");
-            return res.redirect("/");
+            // req.flash("error", "Invalid email or password");
+            // return res.redirect("/");
+            return res.redirect("/?error=Invalid email or password");
         }
 
         bcrypt.compare(password,user.password,(err,result)=>{

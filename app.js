@@ -9,8 +9,8 @@ const adminRoute=require('./routes/adminRoute')
 const usersRoute=require('./routes/usersRoute')
 const productsRoute=require('./routes/productsRoute')
 const indexRouter=require('./routes/index')
-const session = require("express-session");
-const flash = require("connect-flash");
+// const session = require("express-session");
+// const flash = require("connect-flash");
 
 connectDb();
 app.set("trust proxy", 1);
@@ -19,13 +19,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'public')));
-app.use(session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false } 
-}));
-app.use(flash());
+// app.use(session({
+//     secret: process.env.SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { secure: false } 
+// }));
+// app.use(flash());
 
  
 app.use('/',indexRouter);

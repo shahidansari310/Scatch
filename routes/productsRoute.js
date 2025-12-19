@@ -23,7 +23,7 @@ router.post('/create', upload.single("image"), (req, res) => {
             textcolor
         });
         req.flash("success","Product created successfully");
-        res.redirect("/admin/admin");
+        res.redirect("/admin/dashboard");
     } catch (err) {
         res.status(500).send(err.message);
     }

@@ -5,18 +5,21 @@ const userModel = require("../models/user-model");
 const router = express.Router();
 
 router.get("/", function (req, res) {
-    let error = req.flash("error");
+    // let error = req.flash("error");
+    let error = req.query.error || "";
     res.render("index", { error, loggedin: false }); 
 });
 
 router.get("/signup", function (req, res) {
-    let error = req.flash("error");
+    // let error = req.flash("error");
+    let error = req.query.error || "";
     res.render("signup", { error, loggedin: false });
 });
 
 router.get("/shop", isLoggedin, async (req, res) => {
     let products = await productModel.find();
-    let success = req.flash("success");
+    // let success = req.flash("success");
+    let success = req.query.success || "";
     res.render('shop', { products, success });
 })
 
@@ -60,8 +63,9 @@ router.get("/addtocart/:id", isLoggedin, async (req, res) => {
     let user = await userModel.findOne({ email: req.user.email });
     user.cart.push(req.params.id);
     await user.save();
-    req.flash("success", "Added to cart");
-    res.redirect("/shop");
+    // req.flash("success", "Added to cart");
+    res.redirect("/shop?success=Added to cart");
+    
 })
 
 router.get("/removefromcart/:id", isLoggedin, async (req, res) => {
@@ -71,8 +75,8 @@ router.get("/removefromcart/:id", isLoggedin, async (req, res) => {
         user.cart.pull(req.params.id);
         await user.save();
         
-        req.flash("success", "Item removed from cart");
-        res.redirect("/cart");
+        // req.flash("success", "Item removed from cart");
+        res.redirect("/cart?success=Item removed from cart");
     } catch (err) {
         res.redirect("/cart");
     }
