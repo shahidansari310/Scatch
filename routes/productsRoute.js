@@ -22,8 +22,8 @@ router.post('/create', upload.single("image"), (req, res) => {
             panelcolor,
             textcolor
         });
-        req.flash("success","Product created successfully");
-        res.redirect("/admin/dashboard");
+        // req.flash("success","Product created successfully");
+        res.redirect("/admin/dashboard?success=Product created successfully");
     } catch (err) {
         res.status(500).send(err.message);
     }

@@ -8,7 +8,8 @@ const isAdmin = require('../middlewares/isAdmin');
 
 // Render Admin Login Page
 router.get('/owner', (req, res) => {
-    let error = req.flash("error");
+    // let error = req.flash("error");
+    let error = req.query.error || "";
     res.render("owner-login", { error, loggedin: false });
 });
 
@@ -44,36 +45,37 @@ router.post('/login', async (req, res) => {
         let admin = await adminmodel.findOne({ email });
         
         if (!admin) {
-            req.flash("error", "Invalid admin credentials");
-            return res.redirect("/owner");
+            // req.flash("error", "Invalid admin credentials");
+            return res.redirect("/owner?error=Invalid admin credentials");
         }
 
         let isMatch = await bcrypt.compare(password, admin.password);
         if (!isMatch) {
-            req.flash("error", "Invalid admin credentials");
-            return res.redirect("/owner");
+            // req.flash("error", "Invalid admin credentials");
+            return res.redirect("/owner?error=Invalid admin credentials");
         }
 
         let token = jwt.sign({ email: admin.email, id: admin._id }, process.env.SECRET);
         res.cookie("adminToken", token);
         res.redirect("/admin/dashboard");
     } catch (error) {
-        req.flash("error", "Something went wrong");
-        res.redirect("/owner");
+        // req.flash("error", "Something went wrong");
+        res.redirect("/owner?error=Something went wrong");
     }
 });
 
 // Admin Logout
 router.get('/logout', (req, res) => {
     res.clearCookie("adminToken");
-    req.flash("success", "Logged out successfully");
-    res.redirect("/owner");
+    // req.flash("success", "Logged out successfully");
+    res.redirect("/owner?success=Logged out successfully");
 });
 
 // Protected Admin Routes - Add isAdmin middleware
 router.get('/dashboard', isAdmin, async (req, res) => {
     let products = await productModel.find();
-    let success = req.flash("success");
+    // let success = req.flash("success");
+    let success = req.query.success || "";
     res.render("admin", { 
         products, 
         success, 
@@ -84,7 +86,8 @@ router.get('/dashboard', isAdmin, async (req, res) => {
 
 // View Create Product Page
 router.get('/create-product', isAdmin, (req, res) => {
-    let success = req.flash("success");
+    // let success = req.flash("success");
+    let success = req.query.success || "";
     res.render("createproducts", { 
         success, 
         user: null, 
@@ -95,15 +98,15 @@ router.get('/create-product', isAdmin, (req, res) => {
 // Delete Product Logic 
 router.get('/delete/:id', isAdmin, async (req, res) => {
     await productModel.findOneAndDelete({ _id: req.params.id });
-    req.flash("success", "Product deleted successfully");
-    res.redirect("/admin/dashboard");
+    // req.flash("success", "Product deleted successfully");
+    res.redirect("/admin/dashboard?success=Product deleted successfully");
 });
 
 // Delete All Products 
 router.get('/delete-all', isAdmin, async (req, res) => {
     await productModel.deleteMany({});
-    req.flash("success", "Inventory cleared");
-    res.redirect("/admin/dashboard");
+    // req.flash("success", "Inventory cleared");
+    res.redirect("/admin/dashboard?success=Inventory cleared");
 });
 
 module.exports = router;
