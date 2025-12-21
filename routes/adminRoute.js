@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
         res.redirect("/admin/dashboard");
     } catch (error) {
         // req.flash("error", "Something went wrong");
-        res.redirect("/owner?error=Something went wrong");
+        res.redirect("/?error=Something went wrong");
     }
 });
 
@@ -68,7 +68,7 @@ router.post('/login', async (req, res) => {
 router.get('/logout', (req, res) => {
     res.clearCookie("adminToken");
     // req.flash("success", "Logged out successfully");
-    res.redirect("/owner?success=Logged out successfully");
+    res.redirect("/?success=Logged out successfully");
 });
 
 // Protected Admin Routes - Add isAdmin middleware
